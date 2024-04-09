@@ -1,22 +1,21 @@
-function calcularBalancoAnual() {
-    let ganhoAnual = 0;
-    let gastoAnual = 0;
+function calcularBalançoAnual() {
+    let ganhos = [];
+    let gastos = [];
 
-    for (let mes = 1; mes <= 12; mes++) {
-        let ganhoMensal = parseFloat(prompt(`Digite o ganho bruto do mês ${mes}:`));
-        let gastoMensal = parseFloat(prompt(`Digite os gastos do mês ${mes}:`));
-        
-        ganhoAnual += ganhoMensal;
-        gastoAnual += gastoMensal;
+    for (let i = 0; i < 12; i++) {
+        let ganho = parseFloat(prompt(`Digite o ganho bruto do mês ${i+1}:`));
+        ganhos.push(ganho);
+        let gasto = parseFloat(prompt(`Digite os gastos do mês ${i+1}:`));
+        gastos.push(gasto);
     }
 
-    let saldo = ganhoAnual - gastoAnual;
-    let resultado = saldo > 0 ? "lucro" : (saldo < 0 ? "prejuízo" : "equilibrado");
+    let ganhoAnual = ganhos.reduce((total, ganho) => total + ganho, 0);
+    let gastoAnual = gastos.reduce((total, gasto) => total + gasto, 0);
+    let saldoFinanceiro = ganhoAnual - gastoAnual;
+    let resultado = saldoFinanceiro >= 0 ? "lucro" : "prejuízo";
 
-    alert("Balanço Financeiro Anual:\n\n" +
-          "Ganho Bruto Anual: R$ " + ganhoAnual.toFixed(2) + "\n" +
-          "Gasto Anual: R$ " + gastoAnual.toFixed(2) + "\n" +
-          "Saldo Financeiro: R$ " + saldo.toFixed(2) + " (" + resultado + ")");
+    console.log(`Ganho bruto anual: R$ ${ganhoAnual.toFixed(2)}`);
+    console.log(`Gasto anual: R$ ${gastoAnual.toFixed(2)}`);
+    console.log(`Saldo financeiro: R$ ${saldoFinanceiro.toFixed(2)} (${resultado})`);
 }
-
-window.onload = calcularBalancoAnual;
+calcularBalançoAnual();
